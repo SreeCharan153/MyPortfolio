@@ -7,9 +7,9 @@ import { Badge } from "./ui/badge";
 const About = () => {
   const experiences = [
     {
-      title: "Founder",
+      title: "CoFounder",
       company: "PillionPal",
-      period: "2023 - Present",
+      period: "2024 - Present",
       description:
         "Leading the development of an innovative motorcycle ride-sharing platform focused on affordable urban commuting solutions.",
     },
@@ -58,7 +58,7 @@ const About = () => {
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Me</h2>
             <p className="text-lg text-muted-foreground">
               I am a passionate tech innovator and cybersecurity enthusiast with a
-              focus on creating impactful solutions. Currently, I'm leading
+              focus on creating impactful solutions. Currently, I&apos;m leading
               PillionPal, a startup revolutionizing urban transportation through
               motorcycle ride-sharing.
             </p>

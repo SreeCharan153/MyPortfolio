@@ -15,8 +15,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1000",
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       links: {
-        live: "#",
-        github: "#"
+        live: "https://example.com",
+        github: "https://github.com"
       }
     },
     {
@@ -25,8 +25,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1000",
       tags: ["React Native", "Node.js", "MongoDB", "WebSocket"],
       links: {
-        live: "#",
-        github: "#"
+        live: "https://example.com",
+        github: "https://github.com"
       }
     },
     {
@@ -35,8 +35,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1000",
       tags: ["React", "Firebase", "Material-UI", "Redux"],
       links: {
-        live: "#",
-        github: "#"
+        live: "https://example.com",
+        github: "https://github.com"
       }
     }
   ];

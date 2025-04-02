@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ThemeToggle } from "./themetoggle";
+import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
@@ -15,7 +15,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
       const sections = document.querySelectorAll("section[id]");
       const scrollY = window.pageYOffset;
 
@@ -63,7 +62,6 @@ const Navbar = () => {
             Sri Charan M.
           </motion.a>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <motion.a
@@ -95,7 +93,6 @@ const Navbar = () => {
             <ThemeToggle />
           </div>
 
-          {/* Mobile Navigation */}
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
             <Sheet>
