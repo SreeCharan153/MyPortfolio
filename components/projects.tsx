@@ -35,8 +35,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1000",
       tags: ["React", "Firebase", "Material-UI", "Redux"],
       links: {
-        live: "https://example.com",
-        github: "https://github.com"
+        live: "https://esummit-rec.vercel.app/",
+        github: "https://github.com/BhimaPavanTeja/e-summit-rec"
       }
     }
   ];
