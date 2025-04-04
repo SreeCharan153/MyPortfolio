@@ -7,21 +7,35 @@ import { Badge } from "./ui/badge";
 const About = () => {
   const experiences = [
     {
-      title: "CoFounder",
+      title: "Co-Founder & CEO",
       company: "PillionPal",
       period: "2024 - Present",
       description:
-        "Leading the development of an innovative motorcycle ride-sharing platform focused on affordable urban commuting solutions.",
+        "Leading PillionPal, a motorcycle ride-sharing startup, driving product development, operations, and strategic growth.",
     },
     {
-      title: "Cybersecurity Researcher",
-      company: "Independent",
+      title: "Cybersecurity Student",
+      company: "Raghu Institute of Technology",
       period: "2022 - Present",
       description:
-        "Conducting research in cybersecurity, focusing on emerging threats and defensive strategies.",
+        "Pursuing a B.Tech in Cybersecurity, exploring ethical hacking, cryptography, and advanced security protocols.",
+    },
+    {
+      title: "Web Developer",
+      company: "E-Cell REC",
+      period: "2025",
+      description:
+        "Developed the official E-Summit website, integrating event schedules and enhancing user experience.",
+    },
+    {
+      title: "Virtual Intern",
+      company: "CODSOFT",
+      period: "2024",
+      description:
+        "Completed a virtual internship focused on web development projects, including a portfolio, landing page, and calculator.",
     },
   ];
-
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

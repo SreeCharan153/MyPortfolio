@@ -135,7 +135,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background">
+    <section id="Hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background">
       {/* 🎯 Neural Network Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 

@@ -15,8 +15,8 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1000",
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       links: {
-        live: "https://example.com",
-        github: "https://github.com"
+        live: "https://pillionpal.vercel.app/",
+        github: "https://github.com/SreeCharan153/PillionPal-website"
       }
     },
     {
@@ -26,7 +26,7 @@ const Projects = () => {
       tags: ["React Native", "Node.js", "MongoDB", "WebSocket"],
       links: {
         live: "https://example.com",
-        github: "https://github.com"
+        github: "https://github.com/SreeCharan153/PillionPal"
       }
     },
     {
