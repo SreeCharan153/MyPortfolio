@@ -8,30 +8,31 @@ const Skills = () => {
     {
       title: "Development",
       skills: [
-        { name: "React / Next.js", level: 90 },
-        { name: "TypeScript", level: 85 },
-        { name: "Node.js", level: 80 },
-        { name: "React Native", level: 75 },
+        { name: "Flutter", level: 90 },
+        { name: "Firebase", level: 85 },
+        { name: "React / Next.js", level: 80 },
+        { name: "TypeScript", level: 75 },
+        { name: "Node.js", level: 70 }
       ],
     },
     {
-      title: "Cybersecurity",
+      title: "UI/UX Designing",
       skills: [
-        { name: "Network Security", level: 85 },
-        { name: "Penetration Testing", level: 80 },
-        { name: "Security Auditing", level: 75 },
-        { name: "Incident Response", level: 70 },
+        { name: "Figma", level: 85 },
+        { name: "Wireframing & Prototyping", level: 80 },
+        { name: "Design Systems", level: 70 },
+        { name: "Canva", level: 50 }
       ],
     },
     {
       title: "Tools & Technologies",
       skills: [
-        { name: "Git", level: 90 },
-        { name: "Docker", level: 75 },
-        { name: "AWS", level: 70 },
+        { name: "Git & GitHub", level: 90 },
         { name: "Firebase", level: 85 },
+        { name: "Docker", level: 70 },
+        { name: "VS Code / Android Studio", level: 80 }
       ],
-    },
+    }    
   ];
 
   return (
