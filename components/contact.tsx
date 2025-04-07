@@ -45,7 +45,7 @@ const Contact = () => {
                 Have a question or want to work together? Feel free to reach out!
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent> 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
