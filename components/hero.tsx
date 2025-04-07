@@ -136,7 +136,7 @@ const Hero = () => {
 
   return (
     <section id="Hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background">
-      {/* 🎯 Neural Network Canvas */}
+      {/* 🎯 Canvas Animation */}
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
       {/* 🌟 Hero Content */}
@@ -181,8 +181,8 @@ const Hero = () => {
             ))}
           </motion.div>
 
-          {/* 🚀 Call-To-Action */}
-          <motion.div>
+          {/* 🚀 CTA Buttons */}
+          <motion.div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="text-lg group relative overflow-hidden bg-primary text-white hover:bg-purple-600">
               <a href="#projects">
                 <span className="relative z-10">View My Work</span>
@@ -190,11 +190,17 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
             </Button>
+
+            <Button asChild variant="outline" size="lg" className="text-lg">
+              <a href="/Sri Charan Machabhakthuni.pdf" target="_blank" rel="noopener noreferrer">
+                Download Resume
+              </a>
+            </Button>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* ⬇️ Animated Scroll Indicator */}
+      {/* ⬇️ Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} className="text-muted-foreground">
           <ArrowRight className="h-6 w-6 rotate-90" />
