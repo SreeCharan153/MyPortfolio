@@ -40,7 +40,7 @@ const Contact = () => {
         >
           <Card>
             <CardHeader>
-              <CardTitle className="text-3xl text-center">Get in Touch</CardTitle>
+              <CardTitle className="text-3xl text-center gradient-text">Get in Touch</CardTitle>
               <CardDescription className="text-center">
                 Have a question or want to work together? Feel free to reach out!
               </CardDescription>
