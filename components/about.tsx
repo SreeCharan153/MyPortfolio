@@ -71,19 +71,13 @@ const About = () => {
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Me</h2>
             <p className="text-lg text-muted-foreground">
-              Some people write code. I build stories out of it.
-
-I&apos;m Sri Charan Machabhakthuni — a Computer Science & Engineering undergrad with a core in CS, a flair for design, and a brain wired like a neural net. When I&apos;m not pushing pixels or solving logic riddles, I&apos;m working with E-Cell REC, shaping bold ideas into real-world impact.
-
-I&apos;m also the creator of PillionPal — a ride-sharing platform designed for students, by a student who understood the hustle. It&apos;s not just an app, it&apos;s a movement built from scratch to solve a real pain point on campus. From the first line of code to deployment, it&apos;s my brainchild.
-
-I don&apos;t just learn tech — I challenge it. From crafting AI-driven interfaces to designing portfolio experiences that feel alive, I&apos;m constantly exploring where creativity meets computation.
-
-My goal? To blend aesthetic intuition with algorithmic precision, and build tools that actually mean something.
-
-Whether I&apos;m mentoring juniors, solving mock tests late into the night, or designing portfolio sites for friends (yep, guilty), I put heart into every tag and every terminal.
-
-This is just the prelude. The story&apos;s still compiling.
+              Hey there, I&apos;m Sri Charan Machabhakthuni — a Computer Science engineer by training, a builder by choice, and a storyteller at heart. 
+              Whether I&apos;m debugging a stubborn line of code at 2 AM or sketching ideas for my next big project, I thrive on turning thoughts into 
+              tech.Currently, I&apos;m working with E-Cell REC to fuel innovation and entrepreneurial energy on campus — collaborating, organizing, 
+              and executing ideas that matter.I&apos;m also the creator of PillionPal, a smart, intuitive platform designed to make ride-sharing safer 
+              and more accessible — built from scratch with pure grit, logic, and a lot of caffeine.When I&apos;m not working on a project, you&apos;ll 
+              find me chasing design aesthetics, perfecting the flow of a web app, or diving into challenges like HackWithInfy — because learning 
+              never clocks out.
             </p>
           </motion.div>
 
