@@ -35,7 +35,7 @@ const About = () => {
         "Completed a virtual internship focused on web development projects, including a portfolio, landing page, and calculator.",
     },
   ];
-  
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -71,13 +71,7 @@ const About = () => {
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Me</h2>
             <p className="text-lg text-muted-foreground">
-              Hey there, I&apos;m Sri Charan Machabhakthuni — a Computer Science engineer by training, a builder by choice, and a storyteller at heart. 
-              Whether I&apos;m debugging a stubborn line of code at 2 AM or sketching ideas for my next big project, I thrive on turning thoughts into 
-              tech.Currently, I&apos;m working with E-Cell REC to fuel innovation and entrepreneurial energy on campus — collaborating, organizing, 
-              and executing ideas that matter.I&apos;m also the creator of PillionPal, a smart, intuitive platform designed to make ride-sharing safer 
-              and more accessible — built from scratch with pure grit, logic, and a lot of caffeine.When I&apos;m not working on a project, you&apos;ll 
-              find me chasing design aesthetics, perfecting the flow of a web app, or diving into challenges like HackWithInfy — because learning 
-              never clocks out.
+              Hey there, I&apos;m Sri Charan Machabhakthuni — a Computer Science engineer by training, a builder by choice, and a storyteller at heart. Whether it&apos;s debugging a stubborn bug at 2 AM or sketching out the next big idea, I thrive on transforming thought into tech. Currently, I&apos;m working with E-Cell REC to drive innovation and spark entrepreneurial spirit on campus — collaborating, organizing, and executing ideas that actually move the needle. I&apos;m also the founder of <strong>PillionPal</strong>, a smart and secure ride-sharing platform built from scratch with grit, logic, and a generous dose of caffeine. When I&apos;m not deep in code, you&apos;ll catch me chasing design perfection, refining UX flows, or taking on coding gauntlets like HackWithInfy — because learning never clocks out.
             </p>
           </motion.div>
 
