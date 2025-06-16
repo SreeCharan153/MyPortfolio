@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "./ui/button";
+import Typewriter from "typewriter-effect";
 
 const Hero = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -136,10 +137,8 @@ const Hero = () => {
 
   return (
     <section id="Hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background">
-      {/* 🎯 Canvas Animation */}
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
-      {/* 🌟 Hero Content */}
       <div className="relative z-10 container px-6 py-16 text-center">
         <motion.div
           initial={{ opacity: 0 }}
@@ -147,17 +146,28 @@ const Hero = () => {
           transition={{ staggerChildren: 0.2 }}
           className="space-y-8"
         >
-          {/* 🔥 Name & Title */}
           <motion.div className="space-y-3">
             <h1 className="text-5xl md:text-7xl font-bold text-primary">
               Sri Charan Machabhakthuni
             </h1>
             <h2 className="text-lg md:text-2xl text-muted-foreground">
-              Cybersecurity Enthusiast | Startup Founder | Tech Innovator
+              <Typewriter
+                options={{
+                  strings: [
+                    "Cybersecurity Enthusiast",
+                    "Startup Founder",
+                    "Tech Innovator",
+                    "Storyteller",
+                    "Web Developer",
+                    "#SriCharanBuilds"
+                  ],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
             </h2>
           </motion.div>
 
-          {/* 🔗 Social Links */}
           <motion.div className="flex justify-center gap-6">
             {[
               { icon: Github, href: "https://github.com/SreeCharan153", label: "GitHub" },
@@ -181,7 +191,6 @@ const Hero = () => {
             ))}
           </motion.div>
 
-          {/* 🚀 CTA Buttons */}
           <motion.div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="text-lg group relative overflow-hidden bg-primary text-white hover:bg-purple-600">
               <a href="#projects">
@@ -200,7 +209,6 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* ⬇️ Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} className="text-muted-foreground">
           <ArrowRight className="h-6 w-6 rotate-90" />
