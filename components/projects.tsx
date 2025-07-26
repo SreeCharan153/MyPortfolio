@@ -40,7 +40,7 @@ const Projects = () => {
       description:
         "A terminal-based ATM algorithm simulating secure cash withdrawals, PIN authentication, balance tracking, and error handling — built to replicate real ATM logic with a focus on data validation and user experience.",
       image:
-        "https://images.unsplash.com/photo-1588776814546-ec7bd493b3d3?auto=format&fit=crop&q=80&w=1000", // This image shows a real ATM machine, more relevant
+        "https://images.pexels.com/photos/13406565/pexels-photo-13406565.jpeg", // This image shows a real ATM machine, more relevant
       tags: ["Python", "OOP", "CLI App", "Banking Logic"],
       links: {
         live: "https://replit.com/@SreeCharan13/ATM", // change if you hosted somewhere else
