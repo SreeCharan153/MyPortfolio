@@ -43,8 +43,8 @@ const Projects = () => {
         "https://images.unsplash.com/photo-1588776814546-ec7bd493b3d3?auto=format&fit=crop&q=80&w=1000", // This image shows a real ATM machine, more relevant
       tags: ["Python", "OOP", "CLI App", "Banking Logic"],
       links: {
-        live: "https://replit.com/@SreeCharan153/ATM-Simulator", // change if you hosted somewhere else
-        github: "https://github.com/SreeCharan153/ATM-Simulator",
+        live: "https://replit.com/@SreeCharan13/ATM", // change if you hosted somewhere else
+        github: "https://github.com/SreeCharan153/ATM",
       },
     },
 
