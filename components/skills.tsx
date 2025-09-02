@@ -11,7 +11,8 @@ const Skills = () => {
         { name: "Flutter", level: 90 },
         { name: "React / Next.js", level: 85 },
         { name: "TypeScript", level: 80 },
-        { name: "Node.js", level: 75 },
+        { name: "FastAPI", level: 80 },
+        { name: "Python", level: 75 },
       ],
     },
     {
@@ -20,7 +21,7 @@ const Skills = () => {
         { name: "Figma", level: 85 },
         { name: "Wireframing & Prototyping", level: 80 },
         { name: "Design Systems", level: 70 },
-        { name: "Canva", level: 50 },
+        { name: "Canva", level: 70 },
       ],
     },
     {
@@ -28,8 +29,8 @@ const Skills = () => {
       skills: [
         { name: "Git & GitHub", level: 90 },
         { name: "Firebase", level: 85 },
-        { name: "Docker", level: 70 },
-        { name: "VS Code / Android Studio", level: 80 },
+        { name: "VS Code", level: 80 },
+        { name: "Docker", level: 50 },
       ],
     },
   ];

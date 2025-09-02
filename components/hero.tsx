@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import Typewriter from "typewriter-effect";
+import LeetCodeIcon from "./LeetCodeIcon";
 
 const Hero = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -154,10 +155,10 @@ const Hero = () => {
               <Typewriter
                 options={{
                   strings: [
-                    "Cybersecurity Enthusiast",
+                    "Python Developer",
                     "Startup Founder",
-                    "Tech Innovator",
                     "Storyteller",
+                    "Tech Innovator",
                     "Web Developer",
                     "#SriCharanBuilds"
                   ],
@@ -173,6 +174,8 @@ const Hero = () => {
               { icon: Github, href: "https://github.com/SreeCharan153", label: "GitHub" },
               { icon: Linkedin, href: "https://www.linkedin.com/in/sree-charan-machabhakthuni/", label: "LinkedIn" },
               { icon: Mail, href: "mailto:sricharanmachabhakthuni@gmail.com", label: "Email" },
+              { icon: LeetCodeIcon, href: "https://leetcode.com/u/sreecharan750/", label: "LeetCode" },
+
             ].map((social) => (
               <motion.a
                 key={social.label}
@@ -202,7 +205,7 @@ const Hero = () => {
 
             <Button asChild variant="outline" size="lg" className="text-lg">
               <a href="/Sri Charan Machabhakthuni.pdf" target="_blank" rel="noopener noreferrer">
-                Download Resume
+                View Resume
               </a>
             </Button>
           </motion.div>

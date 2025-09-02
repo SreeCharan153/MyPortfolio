@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
+import LeetCodeIcon from "./LeetCodeIcon";
 
 const Footer = () => {
   return (
@@ -36,6 +37,14 @@ const Footer = () => {
               className="text-muted-foreground hover:text-primary transition-all hover:scale-110"
             >
               <Mail className="h-5 w-5" />
+            </a>
+            <a 
+            href="https://leetcode.com/u/sreecharan750/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-primary transition-all hover:scale-110"
+            >
+              <LeetCodeIcon className="h-5 w-5" />
             </a>
           </div>
 

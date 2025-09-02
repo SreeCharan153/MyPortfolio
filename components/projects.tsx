@@ -36,14 +36,14 @@ const Projects = () => {
     },
 
     {
-      title: "ATM Simulator",
+      title: "Banking Web Application (FastAPI + Next.js + SQLite)",
       description:
-        "A terminal-based ATM algorithm simulating secure cash withdrawals, PIN authentication, balance tracking, and error handling — built to replicate real ATM logic with a focus on data validation and user experience.",
+        "Full-stack system with FastAPI backend, Next.js frontend, and SQLite DB supporting account creation, authentication, deposits, withdrawals, transfers, and transaction history. Focused on secure API design, hashed credentials, and a responsive, user-friendly interface.",
       image:
         "https://images.pexels.com/photos/13406565/pexels-photo-13406565.jpeg", // This image shows a real ATM machine, more relevant
-      tags: ["Python", "OOP", "CLI App", "Banking Logic"],
+      tags: ["Python", "OOP", "Next", "Banking Logic" , "SQLite" , "FastAPI" , ],
       links: {
-        live: "https://replit.com/@SreeCharan13/ATM", // change if you hosted somewhere else
+        live: "https://my-banking-application.vercel.app/", // change if you hosted somewhere else
         github: "https://github.com/SreeCharan153/ATM",
       },
     },
