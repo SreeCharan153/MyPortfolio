@@ -19,43 +19,49 @@ const Contact = () => {
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+  try {
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      body: JSON.stringify({
+        name: formData.get("name"),
+        email: formData.get("email"),
+        subject: formData.get("subject"),
+        message: formData.get("message"),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+    const data = await res.json();
 
-      if (res.ok) {
-        toast({
-          title: "Message sent!",
-          description: "Thank you for your message. I'll get back to you soon.",
-        });
-        e.currentTarget.reset();
-      } else {
-        toast({
-          title: "Failed to send",
-          description: "Something went wrong. Please try again later.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
+    if (data.success) {
       toast({
-        title: "Error",
-        description: "Unable to send message. Please try again later.",
-        variant: "destructive",
+        title: "Message sent! ✅",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+      form.reset();
+    } else {
+      toast({
+        title: "Failed to send message ❌",
+        description: data.error || "Please try again later.",
       });
     }
-
+  } catch (err) {
+    toast({
+      title: "Failed to send message ❌",
+      description: "Please try again later.",
+    });
+  } finally {
     setIsSubmitting(false);
-  };
+  }
+};
+
 
   return (
     <section id="contact" className="py-20">
