@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
@@ -16,16 +22,39 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
 
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for your message. I'll get back to you soon.",
+        });
+        e.currentTarget.reset();
+      } else {
+        toast({
+          title: "Failed to send",
+          description: "Something went wrong. Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      toast({
+        title: "Error",
+        description: "Unable to send message. Please try again later.",
+        variant: "destructive",
+      });
+    }
 
     setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
   };
 
   return (
@@ -52,11 +81,7 @@ const Contact = () => {
                     <label htmlFor="name" className="text-sm font-medium">
                       Name
                     </label>
-                    <Input
-                      id="name"
-                      placeholder="Your name"
-                      required
-                    />
+                    <Input id="name" name="name" placeholder="Your name" required />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium">
@@ -64,6 +89,7 @@ const Contact = () => {
                     </label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       placeholder="Your email"
                       required
@@ -74,11 +100,7 @@ const Contact = () => {
                   <label htmlFor="subject" className="text-sm font-medium">
                     Subject
                   </label>
-                  <Input
-                    id="subject"
-                    placeholder="Subject"
-                    required
-                  />
+                  <Input id="subject" name="subject" placeholder="Subject" required />
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">
@@ -86,6 +108,7 @@ const Contact = () => {
                   </label>
                   <Textarea
                     id="message"
+                    name="message"
                     placeholder="Your message"
                     rows={5}
                     required
@@ -101,6 +124,6 @@ const Contact = () => {
       </div>
     </section>
   );
-}
+};
 
 export default Contact;
