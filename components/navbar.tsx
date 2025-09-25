@@ -54,22 +54,22 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-        <ScrollLink
-  to="Hero"
-  smooth={true}
-  spy={true}
-  offset={-80}
-  duration={500}
-  className="text-xl font-bold gradient-text cursor-pointer"
->
-  <motion.span
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    Sri Charan M.
-  </motion.span>
-</ScrollLink>
+          {/* Logo / Hero link */}
+          <ScrollLink
+            to="hero"
+            smooth={true}
+            spy={true}
+            offset={-80}
+            duration={500}
+            className="text-xl font-bold gradient-text cursor-pointer"
+            href="#hero" // crawlable link
+          >
+            <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              Sri Charan M.
+            </motion.span>
+          </ScrollLink>
 
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <ScrollLink
@@ -79,6 +79,7 @@ const Navbar = () => {
                 spy={true}
                 offset={-80}
                 duration={500}
+                href={`#${item.to}`} // crawlable link
                 className={`relative text-sm font-medium cursor-pointer transition-colors ${
                   activeSection === item.to
                     ? "text-foreground"
@@ -91,11 +92,7 @@ const Navbar = () => {
                     layoutId="activeSection"
                     className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
                     initial={false}
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 30,
-                    }}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
               </ScrollLink>
@@ -103,6 +100,7 @@ const Navbar = () => {
             <ThemeToggle />
           </div>
 
+          {/* Mobile menu */}
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
             <Sheet>
@@ -114,21 +112,20 @@ const Navbar = () => {
               <SheetContent>
                 <div className="flex flex-col gap-6 mt-8">
                   {navItems.map((item) => (
-                    <ScrollLink
-                      key={item.name}
-                      to={item.to}
-                      smooth={true}
-                      spy={true}
-                      offset={-80}
-                      duration={500}
-                      className={`text-lg font-medium cursor-pointer ${
-                        activeSection === item.to
-                          ? "text-primary"
-                          : "text-foreground"
-                      }`}
-                    >
-                      {item.name}
-                    </ScrollLink>
+                    <a href={`#${item.to}`} key={item.name}>
+                      <ScrollLink
+                        to={item.to}
+                        smooth={true}
+                        spy={true}
+                        offset={-80}
+                        duration={500}
+                        className={`text-lg font-medium cursor-pointer ${
+                          activeSection === item.to ? "text-primary" : "text-foreground"
+                        }`}
+                      >
+                        {item.name}
+                      </ScrollLink>
+                    </a>
                   ))}
                 </div>
               </SheetContent>
