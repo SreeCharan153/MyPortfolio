@@ -29,6 +29,7 @@ export default function Home() {
           property="og:description"
           content="Explore the portfolio of Sri Charan Machabhakthuni, featuring projects, skills, and contact information."
         />
+        <meta name="google-site-verification" content="WfIZz18GHMJ7YCVbbNtXrM0QOcOR5bz7B1VX54U3-68" />
         <meta property="og:url" content="https://sri-charan-machabhakthuni.vercel.app/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/portfolio-banner.png" />
