@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sri-charan-machabhakthuni.vercel.app
+
+# Sitemaps
+Sitemap: https://sri-charan-machabhakthuni.vercel.app/sitemap.xml
