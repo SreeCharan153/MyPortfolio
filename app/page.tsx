@@ -2,6 +2,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
+import Badges from "@/components/badges";
 
 // Lazy-load non-critical sections for better performance
 const About = dynamic(() => import("@/components/about"));
@@ -50,6 +51,7 @@ export default function Home() {
         <About />
         <Projects />
         <Skills/>
+        <Badges/>
         <Contact />
         <Footer />
       </main>
