@@ -7,32 +7,32 @@ import { Badge } from "./ui/badge";
 const About = () => {
   const experiences = [
     {
-      title: "Co-Founder & CEO",
+      title: "Python Developer Intern",
+      company: "Zaalima Development (Remote)",
+      period: "Sep 2025 - Present",
+      description:
+        "Building File Organizer Pro, an automated file management tool with rule-based sorting, duplicate detection, SQLite logging and scheduler-based background automation.",
+    },
+    {
+      title: "Backend Developer",
       company: "PillionPal",
       period: "2024 - Present",
       description:
-        "Leading PillionPal, a motorcycle ride-sharing startup, driving product development, operations, and strategic growth.",
+        "Developing the backend for a motorcycle ride-sharing platform using FastAPI, WebSockets, JWT auth, real-time tracking and a mileage-based fare engine called FairSplit.",
+    },
+    {
+      title: "Web Developer & Startup Support",
+      company: "E-Cell REC",
+      period: "Feb 2024 - Mar 2025",
+      description:
+        "Built the official E-Summit website and supported early-stage startups with MVP development, landing pages and scalable product architecture.",
     },
     {
       title: "Cybersecurity Student",
       company: "Raghu Institute of Technology",
       period: "2022 - Present",
       description:
-        "Pursuing a B.Tech in Cybersecurity, exploring ethical hacking, cryptography, and advanced security protocols.",
-    },
-    {
-      title: "Web Developer",
-      company: "E-Cell REC",
-      period: "2025",
-      description:
-        "Developed the official E-Summit website, integrating event schedules and enhancing user experience.",
-    },
-    {
-      title: "Virtual Intern",
-      company: "CODSOFT",
-      period: "2024",
-      description:
-        "Completed a virtual internship focused on web development projects, including a portfolio, landing page, and calculator.",
+        "Pursuing B.Tech in CSE Cybersecurity while specializing in backend development, authentication systems and secure system design.",
     },
   ];
 
@@ -40,9 +40,7 @@ const About = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
@@ -51,10 +49,7 @@ const About = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
@@ -70,22 +65,24 @@ const About = () => {
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Me</h2>
-            <p className="text-lg text-muted-foreground">
-              Hey there, I&apos;m Sri Charan Machabhakthuni — a Computer Science engineer by training, a builder by choice, and a storyteller at heart. Whether it&apos;s debugging a stubborn bug at 2 AM or sketching out the next big idea, I thrive on transforming thought into tech. Currently, I&apos;m working with E-Cell REC to drive innovation and spark entrepreneurial spirit on campus — collaborating, organizing, and executing ideas that actually move the needle. I&apos;m also the founder of <strong>PillionPal</strong>, a smart and secure ride-sharing platform built from scratch with grit, logic, and a generous dose of caffeine. When I&apos;m not deep in code, you&apos;ll catch me chasing design perfection, refining UX flows, or taking on coding gauntlets like HackWithInfy — because learning never clocks out.
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              I&apos;m a backend-focused Python developer specializing in FastAPI, PostgreSQL, authentication systems and
+              scalable REST APIs. I enjoy turning complex logic into clean, production-ready backend architecture,
+              whether it&apos;s real-time communication, job scheduling or secure transactions.
+              <br /><br />
+              Currently, I&apos;m building PillionPal — a GPS-based ride-sharing platform — and working as a Python Developer
+              Intern at Zaalima Development, where I build automation tools used in real environments.
             </p>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <h3 className="text-2xl font-semibold mb-8 text-center">
-              Professional Journey
+              Professional Experience
             </h3>
+
             <div className="space-y-6">
               {experiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="relative"
-                >
+                <motion.div key={index} variants={itemVariants} className="relative">
                   <Card className="card-hover">
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
@@ -95,10 +92,7 @@ const About = () => {
                           </h4>
                           <p className="text-muted-foreground">{exp.company}</p>
                         </div>
-                        <Badge
-                          variant="secondary"
-                          className="self-start md:self-center"
-                        >
+                        <Badge variant="secondary" className="self-start md:self-center">
                           {exp.period}
                         </Badge>
                       </div>

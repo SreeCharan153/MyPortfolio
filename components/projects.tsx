@@ -11,56 +11,58 @@ import { cn } from "@/lib/utils"; // For conditional classes if you use this uti
 const Projects = () => {
   const projects = [
     {
-      title: "PillionPal Website",
-      description:
-        "An informational and promotional website for PillionPal, showcasing the motorcycle ride-sharing platform's features and benefits.",
-      image:
-        "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1000",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      title: "PillionPal – FastAPI Backend",
+      description:"Backend for a motorcycle ride-sharing platform using FastAPI. Includes JWT auth, OTP login, ride booking & cancellation, live GPS tracking via WebSockets, user wallet, and FairSplit — a mileage-based fare calculation engine.",
+      image:"https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1000",
+      tags: ["FastAPI", "PostgreSQL", "WebSockets", "JWT", "Docker", "REST APIs"],
       links: {
         live: "https://pillionpal.vercel.app/",
         github: "https://github.com/SreeCharan153/PillionPal-website",
-      },
+       },
     },
     {
-      title: "PillionPal Application",
-      description:
-        "A full-featured ride-sharing application enabling users to book and manage motorcycle rides efficiently.",
-      image:
-        "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1000",
-      tags: ["Flutter", "Dart", "Firebase", "MapBox"],
+      title: "PillionPal Mobile App + API Integration",
+      description: "Flutter client for PillionPal communicating with secured FastAPI endpoints for real-time ride bookings, cancellations, wallet history, and live location streaming. Integrates MapBox for route visualization and WebSockets for driver-rider updates.",
+      image:"https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=1000",
+      tags: ["Flutter", "Dart", "WebSockets", "MapBox", "REST APIs"],
       links: {
-        live: "https://example.com",
+        //live: "https://example.com",
         github: "https://github.com/SreeCharan153/PillionPal",
       },
     },
-
     {
-      title: "Banking Web Application (FastAPI + Next.js + SQLite)",
-      description:
-        "Full-stack system with FastAPI backend, Next.js frontend, and SQLite DB supporting account creation, authentication, deposits, withdrawals, transfers, and transaction history. Focused on secure API design, hashed credentials, and a responsive, user-friendly interface.",
-      image:
-        "https://images.pexels.com/photos/13406565/pexels-photo-13406565.jpeg", // This image shows a real ATM machine, more relevant
-      tags: ["Python", "OOP", "Next", "Banking Logic" , "SQLite" , "FastAPI" , ],
+      title: "File Organizer Pro – Desktop Automation Tool",
+      description:"Python automation tool that monitors folders in real-time and auto-sorts files based on rules, file type, and patterns. Includes duplicate detection, rollback logs, and SQLite persistence. Reduced manual sorting time by ~90% for real users.",
+      image:"/fileorganizer.png",
+      tags: ["Python", "SQLite", "Watchdog", "Tkinter", "Scheduler", "OOP"],
       links: {
-        live: "https://my-banking-application.vercel.app/", // change if you hosted somewhere else
+        //live: "https://example.com",
+        github: "https://github.com/SreeCharan153/File-organizer",
+      },
+    },
+    {
+      title: "Banking System (FastAPI + Next.js)",
+      description:"Full banking stack with FastAPI backend and Next.js client. Supports account creation, hashed PIN auth, deposits, withdrawals, transfers, and transaction logs. Admin dashboard for user management and fraud-prevention edge case handling.",
+      image:"https://images.pexels.com/photos/13406565/pexels-photo-13406565.jpeg",
+      tags: ["FastAPI", "SQLite", "Next.js", "JWT Auth", "Banking Logic", "REST APIs"],
+      links: {
+        live: "https://my-banking-application.vercel.app/",
         github: "https://github.com/SreeCharan153/ATM",
       },
     },
-
     {
-      title: "E-Summit Website",
-      description:
-        "Website developed for the E-Summit event, featuring event details, registration, and schedule management.",
-      image:
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1000",
-      tags: ["React", "Firebase", "Material-UI", "Redux"],
+      title: "E-Summit Website – Raghu Engineering College",
+      description:"Responsive event website with speaker profiles, schedules, and registration system. Used Firebase for auth and real-time CMS updates, enabling organizers to manage content without code.",
+      image:"https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1000",
+      tags: ["React", "Firebase", "Material-UI", "Responsive UI"],
       links: {
         live: "https://esummit-rec.vercel.app/",
         github: "https://github.com/BhimaPavanTeja/e-summit-rec",
       },
     },
   ];
+
+
 
   return (
     <section id="projects" className="py-24">

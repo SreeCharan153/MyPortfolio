@@ -155,15 +155,16 @@ const Hero = () => {
               <Typewriter
                 options={{
                   strings: [
-                    "Python Developer",
-                    "Startup Founder",
-                    "Storyteller",
-                    "Tech Innovator",
-                    "Web Developer",
-                    "#SriCharanBuilds"
+                    "Python Backend Developer",
+                    "FastAPI • PostgreSQL • REST APIs",
+                    "Authentication & Authorization Systems",
+                    "Async Tasks • Celery • Docker",
+                    "I build scalable backend architecture"
                   ],
-                  autoStart: true,
-                  loop: true,
+                autoStart: true,
+                loop: true,
+                delay: 75,
+                deleteSpeed: 50,
                 }}
               />
             </h2>
@@ -197,7 +198,7 @@ const Hero = () => {
           <motion.div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="text-lg group relative overflow-hidden bg-primary text-white hover:bg-purple-600">
               <a href="#projects">
-                <span className="relative z-10">View My Work</span>
+                <span className="relative z-10">See Backend Projects</span>
                 <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover:translate-x-1 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
@@ -205,10 +206,11 @@ const Hero = () => {
 
             <Button asChild variant="outline" size="lg" className="text-lg">
               <a href="/Sri Charan Machabhakthuni.pdf" target="_blank" rel="noopener noreferrer">
-                View Resume
+                Download Resume (PDF)
               </a>
             </Button>
           </motion.div>
+
         </motion.div>
       </div>
 
