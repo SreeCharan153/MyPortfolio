@@ -54,24 +54,32 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="section-padding bg-muted/50">
-      <div className="container px-4">
+    <section
+      id="about"
+      className="section-padding bg-muted/50 overflow-x-hidden"
+    >
+      <div className="max-w-5xl mx-auto px-4">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
+          className="w-full"
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Me</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I&apos;m a backend-focused Python developer specializing in FastAPI, PostgreSQL, authentication systems and
-              scalable REST APIs. I enjoy turning complex logic into clean, production-ready backend architecture,
-              whether it&apos;s real-time communication, job scheduling or secure transactions.
-              <br /><br />
-              Currently, I&apos;m building PillionPal — a GPS-based ride-sharing platform — and working as a Python Developer
-              Intern at Zaalima Development, where I build automation tools used in real environments.
+              I&apos;m a backend-focused Python developer specializing in FastAPI,
+              PostgreSQL, authentication systems and scalable REST APIs. I enjoy
+              turning complex logic into clean, production-ready backend architecture,
+              whether it&apos;s real-time communication, job scheduling or secure
+              transactions.
+              <br />
+              <br />
+              Currently, I&apos;m building PillionPal — a GPS-based ride-sharing
+              platform — and working as a Python Developer Intern at Zaalima
+              Development, where I build automation tools used in real
+              environments.
             </p>
           </motion.div>
 
@@ -82,20 +90,24 @@ const About = () => {
 
             <div className="space-y-6">
               {experiences.map((exp, index) => (
-                <motion.div key={index} variants={itemVariants} className="relative">
-                  <Card className="card-hover">
+                <motion.div key={index} variants={itemVariants}>
+                  <Card className="card-hover overflow-hidden">
                     <CardContent className="p-6">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                      <div className="flex flex-col md:flex-row md:flex-wrap md:items-center md:justify-between gap-4 mb-4">
                         <div>
                           <h4 className="text-xl font-semibold gradient-text">
                             {exp.title}
                           </h4>
                           <p className="text-muted-foreground">{exp.company}</p>
                         </div>
-                        <Badge variant="secondary" className="self-start md:self-center">
+                        <Badge
+                          variant="secondary"
+                          className="shrink-0 self-start md:self-center"
+                        >
                           {exp.period}
                         </Badge>
                       </div>
+
                       <p className="text-muted-foreground leading-relaxed">
                         {exp.description}
                       </p>

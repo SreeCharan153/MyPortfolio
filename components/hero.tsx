@@ -14,7 +14,7 @@ const Hero = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d")!;
     if (!ctx) return;
 
     let particles: any[] = [];
@@ -22,8 +22,13 @@ const Hero = () => {
     const connectionDistance = 150;
     const cursor = { x: -100, y: -100 };
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // ✅ Prevent overflow by clamping to viewport width, not innerWidth
+    const resizeCanvas = () => {
+      canvas.width = Math.min(window.innerWidth, document.documentElement.clientWidth);
+      canvas.height = window.innerHeight;
+    };
+
+    resizeCanvas();
 
     class Particle {
       x: number;
@@ -44,12 +49,11 @@ const Hero = () => {
         this.x += this.vx;
         this.y += this.vy;
 
-        if (canvas && (this.x <= 0 || this.x >= canvas.width)) this.vx *= -1;
+        if (this.x <= 0 || this.x >= canvas!.width) this.vx *= -1;
         if (this.y <= 0 || this.y >= canvas!.height) this.vy *= -1;
       }
 
       draw() {
-        if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = "#00ff99";
@@ -59,9 +63,7 @@ const Hero = () => {
 
     const initParticles = () => {
       particles = [];
-      for (let i = 0; i < maxParticles; i++) {
-        particles.push(new Particle());
-      }
+      for (let i = 0; i < maxParticles; i++) particles.push(new Particle());
     };
 
     const drawConnections = () => {
@@ -84,14 +86,14 @@ const Hero = () => {
     };
 
     const drawCursorConnection = () => {
-      particles.forEach((particle) => {
-        const dx = particle.x - cursor.x;
-        const dy = particle.y - cursor.y;
+      particles.forEach((p) => {
+        const dx = p.x - cursor.x;
+        const dy = p.y - cursor.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < connectionDistance) {
           ctx.beginPath();
-          ctx.moveTo(particle.x, particle.y);
+          ctx.moveTo(p.x, p.y);
           ctx.lineTo(cursor.x, cursor.y);
           ctx.strokeStyle = "rgba(0, 255, 153, 0.8)";
           ctx.lineWidth = 1.2;
@@ -101,46 +103,43 @@ const Hero = () => {
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((particle) => {
-        particle.move();
-        particle.draw();
+      ctx.clearRect(0, 0, canvas!.width, canvas!.height);
+      particles.forEach((p) => {
+        p.move();
+        p.draw();
       });
-
       drawConnections();
       drawCursorConnection();
-
       requestAnimationFrame(animate);
     };
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    window.addEventListener("resize", () => {
+      resizeCanvas();
       initParticles();
-    };
+    });
 
-    const handleMouseMove = (event: MouseEvent) => {
-      cursor.x = event.clientX;
-      cursor.y = event.clientY;
-    };
-
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", (e) => {
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
+    });
 
     initParticles();
     animate();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
   return (
-    <section id="Hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background">
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+    <section
+      id="Hero"
+      className="relative flex items-center justify-center min-h-screen overflow-x-hidden overflow-y-hidden bg-background"
+    >
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none w-[100vw] h-full" />
 
-      <div className="relative z-10 container px-6 py-16 text-center">
+      {/* ✅ Removed container, no overflow */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-16 text-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -151,6 +150,7 @@ const Hero = () => {
             <h1 className="text-5xl md:text-7xl font-bold text-primary">
               Sri Charan Machabhakthuni
             </h1>
+
             <h2 className="text-lg md:text-2xl text-muted-foreground">
               <Typewriter
                 options={{
@@ -159,37 +159,37 @@ const Hero = () => {
                     "FastAPI • PostgreSQL • REST APIs",
                     "Authentication & Authorization Systems",
                     "Async Tasks • Celery • Docker",
-                    "I build scalable backend architecture"
+                    "I build scalable backend architecture",
                   ],
-                autoStart: true,
-                loop: true,
-                delay: 75,
-                deleteSpeed: 50,
+                  autoStart: true,
+                  loop: true,
+                  delay: 75,
+                  deleteSpeed: 50,
                 }}
               />
             </h2>
           </motion.div>
 
-          <motion.div className="flex justify-center gap-6">
+          {/* ✅ flex-wrap ensures icons never push outside width */}
+          <motion.div className="flex justify-center flex-wrap gap-6 overflow-hidden">
             {[
-              { icon: Github, href: "https://github.com/SreeCharan153", label: "GitHub" },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/sree-charan-machabhakthuni/", label: "LinkedIn" },
-              { icon: Mail, href: "mailto:sricharanmachabhakthuni@gmail.com", label: "Email" },
-              { icon: LeetCodeIcon, href: "https://leetcode.com/u/sreecharan750/", label: "LeetCode" },
-
-            ].map((social) => (
+              { icon: Github, href: "https://github.com/SreeCharan153" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/sree-charan-machabhakthuni/" },
+              { icon: Mail, href: "mailto:sricharanmachabhakthuni@gmail.com" },
+              { icon: LeetCodeIcon, href: "https://leetcode.com/u/sreecharan750/" },
+            ].map((s, i) => (
               <motion.a
-                key={social.label}
+                key={i}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                href={social.href}
+                href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative"
+                className="group relative overflow-hidden"
               >
-                <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-primary/20 to-purple-600/20 blur opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-primary/20 to-purple-600/20 blur opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <Button variant="outline" size="icon" className="relative bg-background">
-                  <social.icon className="h-5 w-5" />
+                  <s.icon className="h-5 w-5" />
                 </Button>
               </motion.a>
             ))}
@@ -205,17 +205,24 @@ const Hero = () => {
             </Button>
 
             <Button asChild variant="outline" size="lg" className="text-lg">
-              <a href="/Sri Charan Machabhakthuni.pdf" target="_blank" rel="noopener noreferrer">
+              <a
+                href="/Sri Charan Machabhakthuni.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Download Resume (PDF)
               </a>
             </Button>
           </motion.div>
-
         </motion.div>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }} className="text-muted-foreground">
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="text-muted-foreground"
+        >
           <ArrowRight className="h-6 w-6 rotate-90" />
         </motion.div>
       </div>

@@ -36,8 +36,11 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-background">
-      <div className="container px-4">
+    <section
+      id="skills"
+      className="py-20 bg-background overflow-x-hidden"
+    >
+      <div className="max-w-6xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,32 +51,37 @@ const Skills = () => {
           <h2 className="text-3xl font-extrabold mb-4 tracking-tight">
             Skills & Expertise
           </h2>
+
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A curated showcase of my technical toolset & creative capabilities.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
+          {skillCategories.map((category, idx) => (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: categoryIndex * 0.1 }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="backdrop-blur-md bg-card/70 border border-border hover:shadow-lg transition-all">
+              <Card className="backdrop-blur-md bg-card/70 border border-border hover:shadow-lg transition-all overflow-hidden">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
+                  <h3 className="text-xl font-semibold mb-4">
+                    {category.title}
+                  </h3>
+
                   <div className="space-y-4">
                     {category.skills.map((skill) => (
-                      <div key={skill.name}>
+                      <div key={skill.name} className="w-full">
                         <div className="flex justify-between mb-1">
                           <span className="text-sm">{skill.name}</span>
                           <span className="text-sm text-muted-foreground">
                             {skill.level}%
                           </span>
                         </div>
+
                         <div className="w-full h-2 rounded-full bg-border overflow-hidden">
                           <div
                             className="h-full bg-gradient-to-r from-primary to-indigo-500 animate-pulse rounded-full"
