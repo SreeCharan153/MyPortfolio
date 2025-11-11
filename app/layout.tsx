@@ -1,31 +1,61 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
-import dynamic from 'next/dynamic';
-import { Analytics } from "@vercel/analytics/react"
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ['latin'] });
-//const Toaster = dynamic(() => import('@/components/ui/toaster'), { ssr: false });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Sri Charan Machabhakthuni - Cybersecurity Enthusiast & Tech Innovator',
-  description: 'Portfolio of Sri Charan Machabhakthuni - Cybersecurity expert, startup founder, and tech innovator. Explore my projects and experience in technology and entrepreneurship.',
-  keywords: ['Sri Charan Machabhakthuni', 'Cybersecurity', 'PillionPal', 'Tech Innovator', 'Startup Founder'],
+  title: "Sri Charan Machabhakthuni – Python Backend Developer",
+  description:
+    "Portfolio of Sri Charan Machabhakthuni – Backend developer specializing in FastAPI, PostgreSQL, authentication systems, and scalable real-time applications.",
+  keywords: [
+    "Sri Charan Machabhakthuni",
+    "Backend Developer",
+    "FastAPI",
+    "PostgreSQL",
+    "Python Developer",
+    "REST APIs",
+    "Cybersecurity",
+    "Authentication Systems",
+    "PillionPal",
+    "RupeeWave",
+  ],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
-    title: 'Sri Charan Machabhakthuni - Cybersecurity Enthusiast & Tech Innovator',
-    description: 'Portfolio of Sri Charan Machabhakthuni - Cybersecurity expert, startup founder, and tech innovator.',
-    url: 'https://sri-charan-machabhakthuni.vercel.app',
-    siteName: 'Sri Charan Machabhakthuni Portfolio',
-    images: [{ url: '/portfolio-banner.png', width: 1200, height: 630, alt: 'Portfolio Banner' }],
-    type: 'website',
+    title: "Sri Charan Machabhakthuni – Backend Developer",
+    description:
+      "FastAPI • PostgreSQL • Auth Systems • Real-time APIs. Explore production-ready backend projects such as PillionPal and RupeeWave.",
+    url: "https://sri-charan-machabhakthuni.vercel.app",
+    siteName: "Sri Charan Portfolio",
+    images: [
+      {
+        url: "/portfolio-banner.png",
+        width: 1200,
+        height: 630,
+        alt: "Sri Charan Portfolio Banner",
+      },
+    ],
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Sri Charan Machabhakthuni Portfolio',
-    description: 'Explore my projects and experience in technology and entrepreneurship.',
-    images: ['/portfolio-banner.png'],
+    card: "summary_large_image",
+    title: "Sri Charan Machabhakthuni – Backend Developer",
+    description:
+      "Production-ready FastAPI backend projects | Real-time apps, authentication, wallets, banking systems.",
+    images: ["/portfolio-banner.png"],
   },
+  metadataBase: new URL("https://sri-charan-machabhakthuni.vercel.app"),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  themeColor: "#0C0C0C",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

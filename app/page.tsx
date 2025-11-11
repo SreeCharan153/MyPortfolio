@@ -2,12 +2,14 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
-import Badges from "@/components/badges";
 
-// Lazy-load non-critical sections for better performance
+// Lazy-load non-critical sections to improve performance
 const About = dynamic(() => import("@/components/about"));
+const BuildProcess = dynamic(() => import("@/components/BuildProcess"));
+const TechStack = dynamic(() => import("@/components/TechStack"));
 const Projects = dynamic(() => import("@/components/projects"));
-const Skills = dynamic(() => import("@/components/skills"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const Badges = dynamic(() => import("@/components/badges"));
 const Contact = dynamic(() => import("@/components/contact"));
 const Footer = dynamic(() => import("@/components/footer"));
 
@@ -15,44 +17,54 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Sri Charan Machabhakthuni - Portfolio</title>
+        <title>Sri Charan Machabhakthuni — Backend Developer</title>
         <meta
           name="description"
-          content="Portfolio of Sri Charan Machabhakthuni, a Computer Science student and developer. Explore projects, skills, and contact information."
+          content="FastAPI, PostgreSQL & secure backend development portfolio of Sri Charan Machabhakthuni."
         />
-        <meta name="keywords" content="Sri Charan Machabhakthuni, portfolio, developer, projects, skills, contact" />
+        <meta name="keywords" content="FastAPI, Backend Developer, Sri Charan, PostgreSQL, WebSockets" />
         <meta name="author" content="Sri Charan Machabhakthuni" />
         <meta name="robots" content="index, follow" />
 
-        {/* Open Graph for social sharing */}
-        <meta property="og:title" content="Sri Charan Machabhakthuni - Portfolio" />
+        {/* Open Graph */}
+        <meta property="og:title" content="Sri Charan Machabhakthuni — Backend Developer" />
         <meta
           property="og:description"
-          content="Explore the portfolio of Sri Charan Machabhakthuni, featuring projects, skills, and contact information."
+          content="Explore backend projects, case studies and real-world systems built with FastAPI + PostgreSQL."
         />
-        <meta name="google-site-verification" content="WfIZz18GHMJ7YCVbbNtXrM0QOcOR5bz7B1VX54U3-68" />
         <meta property="og:url" content="https://sri-charan-machabhakthuni.vercel.app/" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/portfolio-banner.png" />
+        <meta property="og:image" content="/portfolio-banner.svg" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sri Charan Machabhakthuni - Portfolio" />
+        <meta name="twitter:title" content="Sri Charan — Backend Developer" />
         <meta
           name="twitter:description"
-          content="Explore the portfolio of Sri Charan Machabhakthuni, featuring projects, skills, and contact information."
+          content="Secure backend systems, real-time apps, authentication & scalable APIs."
         />
-        <meta name="twitter:image" content="/portfolio-banner.png" />
+        <meta name="twitter:image" content="/portfolio-banner.svg" />
+
+        {/* Google verification */}
+        <meta name="google-site-verification" content="WfIZz18GHMJ7YCVbbNtXrM0QOcOR5bz7B1VX54U3-68" />
       </Head>
 
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background overflow-x-hidden">
+        {/* ✅ Immediate sections (fast to load + recruiter's priority) */}
         <Navbar />
         <Hero />
         <About />
+        <BuildProcess />
+        <TechStack />
+
+        {/* ✅ Heavier sections — deferred for performance */}
         <Projects />
-        <Skills/>
-        <Badges/>
+        <Testimonials />
+
+        {/* ✅ Small trust layer + final conversion */}
+        <Badges />
         <Contact />
+
         <Footer />
       </main>
     </>

@@ -13,6 +13,8 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { Mail, Linkedin, Github, Send } from "lucide-react";
+import Link from "next/link";
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,19 +46,18 @@ const Contact = () => {
       if (data.success) {
         toast({
           title: "Message sent! ✅",
-          description:
-            "Thank you for your message. I'll get back to you soon.",
+          description: "Thanks for reaching out. I’ll reply shortly.",
         });
         form.reset();
       } else {
         toast({
-          title: "Failed to send message ❌",
-          description: data.error || "Please try again later.",
+          title: "Could not send message ❌",
+          description: data.error || "Please try again.",
         });
       }
     } catch {
       toast({
-        title: "Failed to send message ❌",
+        title: "Failed to send ❌",
         description: "Please try again later.",
       });
     } finally {
@@ -65,26 +66,47 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="py-20 overflow-x-hidden"
-    >
+    <section id="contact" className="py-24 bg-muted/50 overflow-x-hidden">
       <div className="max-w-4xl mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="w-full"
         >
-          <Card className="overflow-hidden">
-            <CardHeader>
-              <CardTitle className="text-3xl text-center">
-                Get in Touch
-              </CardTitle>
-              <CardDescription className="text-center">
-                Have a question or want to work together? Feel free to reach out!
+          <Card className="overflow-hidden backdrop-blur-md bg-card/70 border-border shadow-lg">
+            <CardHeader className="text-center space-y-3">
+              <CardTitle className="text-3xl">Let’s Work Together</CardTitle>
+              <CardDescription className="text-base text-muted-foreground">
+                Looking for a backend intern or someone to build secure APIs?
+                Tell me your idea — I usually reply within a day.
               </CardDescription>
+
+              {/* Quick action buttons */}
+              <div className="flex flex-wrap justify-center gap-3 pt-2">
+                <Button asChild variant="outline" size="sm" className="flex gap-2">
+                  <a href="mailto:sricharanmachabhakthuni@gmail.com">
+                    <Mail className="h-4 w-4" /> Email
+                  </a>
+                </Button>
+
+                <Button asChild variant="outline" size="sm" className="flex gap-2">
+                  <a
+                    href="https://www.linkedin.com/in/sree-charan-machabhakthuni/"
+                    target="_blank"
+                  >
+                    <Linkedin className="h-4 w-4" /> LinkedIn
+                  </a>
+                </Button>
+
+                <Button asChild variant="outline" size="sm" className="flex gap-2">
+                  <a
+                    href="https://github.com/SreeCharan153"
+                    target="_blank"
+                  >
+                    <Github className="h-4 w-4" /> GitHub
+                  </a>
+                </Button>
+              </div>
             </CardHeader>
 
             <CardContent>
@@ -94,12 +116,7 @@ const Contact = () => {
                     <label htmlFor="name" className="text-sm font-medium">
                       Name
                     </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      placeholder="Your name"
-                      required
-                    />
+                    <Input id="name" name="name" placeholder="Enter your name" required />
                   </div>
 
                   <div className="space-y-2">
@@ -110,7 +127,7 @@ const Contact = () => {
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="Your email"
+                      placeholder="you@example.com"
                       required
                     />
                   </div>
@@ -120,12 +137,7 @@ const Contact = () => {
                   <label htmlFor="subject" className="text-sm font-medium">
                     Subject
                   </label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    placeholder="Subject"
-                    required
-                  />
+                  <Input id="subject" name="subject" placeholder="I’d like to discuss…" required />
                 </div>
 
                 <div className="space-y-2">
@@ -135,14 +147,18 @@ const Contact = () => {
                   <Textarea
                     id="message"
                     name="message"
-                    placeholder="Your message"
+                    placeholder="Explain your project, idea, or requirement…"
                     rows={5}
                     required
                   />
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                <Button type="submit" className="w-full flex gap-2" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : (
+                    <>
+                      <Send className="h-4 w-4" /> Send Message
+                    </>
+                  )}
                 </Button>
               </form>
             </CardContent>

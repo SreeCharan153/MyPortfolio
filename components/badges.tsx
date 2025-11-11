@@ -32,7 +32,7 @@ const Badges = () => {
         >
           <div className="flex items-center justify-center gap-2 mb-4">
             <Award className="h-8 w-8 text-primary" />
-            <h2 className="text-4xl font-bold gradient-text">
+            <h2 className="text-4xl font-bold gradient-text pb-4">
               Certifications &amp; Badges
             </h2>
           </div>
