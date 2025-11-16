@@ -36,9 +36,10 @@ const BankingSystemCaseStudy = () => {
         </h1>
 
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          A production-style banking backend with hashed PIN authentication,
-          atomic money operations, transaction history, audit logs, and account
-          locking. Built with SQL transactions to ensure balances are never corrupted.
+          A hardened banking backend with strict role-based access, hashed PIN
+          authentication, immutable-style ledgers, and atomic money operations.
+          Built to simulate real financial constraints such as account locking,
+          fraud detection and concurrency safety.
         </p>
 
         <div className="flex justify-center gap-3 mt-4 flex-wrap">
@@ -46,8 +47,8 @@ const BankingSystemCaseStudy = () => {
           <Badge>PostgreSQL</Badge>
           <Badge>JWT Auth</Badge>
           <Badge>Audit Logs</Badge>
-          <Badge>Role-Based Access</Badge>
-          <Badge>Atomic Ops</Badge>
+          <Badge>RBAC</Badge>
+          <Badge>Atomic Transactions</Badge>
         </div>
 
         <div className="flex justify-center gap-4">
@@ -74,7 +75,8 @@ const BankingSystemCaseStudy = () => {
         <CardHeader>
           <CardTitle>System Architecture</CardTitle>
           <CardDescription>
-            Separation between auth, money ops, history & logging.
+            Modular separation across auth, money operations, RBAC and
+            audit-event logging.
           </CardDescription>
         </CardHeader>
 
@@ -87,50 +89,78 @@ const BankingSystemCaseStudy = () => {
             className="rounded-lg shadow"
           />
           <ul className="list-disc ml-6 mt-4 space-y-2 text-muted-foreground">
-            <li>Next.js client → FastAPI services</li>
-            <li>JWT authentication for protected requests</li>
-            <li>Atomic SQL transactions for money operations</li>
-            <li>Audit logs track every sensitive action</li>
+            <li>Next.js client → FastAPI backend</li>
+            <li>JWT-based session and permission enforcement</li>
+            <li>Strict SQL transactions wrapping all money operations</li>
+            <li>Audit trail ensures accountability and traceability</li>
           </ul>
         </CardContent>
       </Card>
 
-      {/* ✅ Database Schema */}
+      {/* RBAC */}
+      <Card className="backdrop-blur-md bg-card/70 border border-border">
+        <CardHeader>
+          <CardTitle>Role-Based Access Control</CardTitle>
+          <CardDescription>
+            Separation of duties between Customer, Teller, and Admin.
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent>
+          <pre className="p-4 rounded-lg bg-secondary/50 text-sm overflow-x-auto">{`ROLE MATRIX
+
+                    Customer   Teller   Admin
+------------------------------------------------
+View Balance         ✔️         ✔️        ✔️
+Deposit/Withdraw     ✔️         ✔️        ✔️
+Transfer Money       ✔️         ✔️        ✔️
+Create Account       ❌         ✔️        ✔️
+Lock/Unlock Account  ❌         ✔️        ✔️
+View All Users       ❌         ❌        ✔️
+View Audit Logs      ❌         ❌        ✔️`}</pre>
+
+          <p className="text-muted-foreground mt-3">
+            Permission checks occur on both the route layer and inside SQL
+            procedures to prevent privilege escalation.
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Database Schema */}
       <Card className="backdrop-blur-md bg-card/70 border border-border">
         <CardHeader>
           <CardTitle>Database Schema</CardTitle>
-          <CardDescription>Normalised with foreign keys and ledger tracking.</CardDescription>
+          <CardDescription>
+            Highly normalised schema with ledger-style history tables.
+          </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-3 text-muted-foreground">
-          <pre className="p-4 rounded-lg bg-secondary/50 overflow-x-auto text-sm">
-{`users (id, user_name, password, role)
+          <pre className="p-4 rounded-lg bg-secondary/50 overflow-x-auto text-sm">{`users (id, user_name, password, role)
 accounts (id, account_no, name, pin, balance, failed_attempts, is_locked, user_id)
 history (id, account_id, amount, type, timestamp)
 audit_logs (id, actor, action, details, ip, user_agent, timestamp)`}</pre>
 
           <p>
-            PINs are bcrypt-hashed before storing. The <strong>history</strong> table
-            records every transaction, giving a full ledger like a real bank.
+            PINs use bcrypt hashing and failed login attempts automatically
+            lock the account. The <strong>history</strong> table works like a
+            mini-ledger capturing all financial activity.
           </p>
         </CardContent>
       </Card>
 
-      {/* ✅ API Endpoints */}
+      {/* API Endpoints */}
       <Card className="backdrop-blur-md bg-card/70 border border-border">
         <CardHeader>
           <CardTitle>API Endpoints</CardTitle>
-          <CardDescription>Structured around authentication & safe money flow.</CardDescription>
+          <CardDescription>Organised by feature domain.</CardDescription>
         </CardHeader>
 
         <CardContent>
-          <pre className="p-4 rounded-lg bg-secondary/50 text-sm overflow-x-auto">
-{`AUTH
+          <pre className="p-4 rounded-lg bg-secondary/50 text-sm overflow-x-auto">{`AUTH
 POST /register_account
 PUT  /change_pin
 POST /login
-POST /withdraw
-POST /deposit
 
 ACCOUNTS
 GET  /get_account_by_account_no
@@ -144,108 +174,48 @@ POST /transfer_to_another_account
 
 HISTORY + AUDIT
 GET  /history/{account_no}
-GET  /get_all_audit_logs
-DELETE /delete_all_history
-DELETE /delete_all_audit_logs`}
-          </pre>
+GET  /get_all_audit_logs  (admin only)
+DELETE /delete_all_history (demo)
+DELETE /delete_all_audit_logs (demo)`}</pre>
         </CardContent>
       </Card>
 
-      {/* ✅ Sample Request/Response */}
+      {/* Request Lifecycle */}
       <Card className="backdrop-blur-md bg-card/70 border border-border">
         <CardHeader>
-          <CardTitle>Sample Requests & Responses</CardTitle>
-          <CardDescription>Used for debugging & testing.</CardDescription>
-        </CardHeader>
-
-        <CardContent>
-          <pre className="bg-secondary/50 p-4 text-sm rounded-lg overflow-x-auto">
-{`# Deposit
-POST /deposit
-{
-  "account_no": "AC00123",
-  "amount": 500
-}
-
-# Response
-{
-  "message": "Deposit successful",
-  "new_balance": 12500.0
-}
-
-# Withdraw
-POST /withdraw
-{
-  "account_no": "AC00123",
-  "amount": 250
-}
-
-# Response
-{
-  "message": "Withdrawal successful",
-  "new_balance": 12250.0
-}
-
-# Transfer
-POST /transfer_to_another_account
-{
-  "from": "AC00123",
-  "to": "AC00456",
-  "amount": 200
-}
-
-# Response
-{
-  "message": "Transfer completed",
-  "from_balance": 12050.0,
-  "to_balance": 8120.0
-}`}
-          </pre>
-        </CardContent>
-      </Card>
-
-      {/* PIN Security */}
-      <Card className="backdrop-blur-md bg-card/70 border border-border">
-        <CardHeader>
-          <CardTitle>PIN Security & Login Safety</CardTitle>
+          <CardTitle>Request Lifecycle</CardTitle>
+          <CardDescription>Full validation pipeline.</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-3 text-muted-foreground">
-          <pre className="p-4 rounded-lg bg-secondary/50 text-sm overflow-x-auto">
-{`def hash_pin(self, pin: str) -> str:
-    return hashpw(pin.encode(), gensalt()).decode()
-
-def verify_pin(self, pin: str, hashed_pin: str) -> bool:
-    return checkpw(pin.encode(), hashed_pin.encode())`}
-          </pre>
-
-          <ul className="list-disc ml-6 mt-2 space-y-2">
-            <li>Stores only hashed PIN strings</li>
-            <li>Failed attempts increment counter</li>
-            <li>If limit passed → account automatically locked</li>
+          <ul className="list-disc ml-6 space-y-2">
+            <li>JWT decoded → role + permissions verified</li>
+            <li>Account state validated (locked, failed attempts)</li>
+            <li>SELECT ... FOR UPDATE ensures row-level locking</li>
+            <li>Money operation + history entry wrapped in transaction</li>
+            <li>Audit log written</li>
           </ul>
         </CardContent>
       </Card>
 
-      {/* Atomic Transactions */}
+      {/* Concurrency */}
       <Card className="backdrop-blur-md bg-card/70 border border-border">
         <CardHeader>
-          <CardTitle>Atomic Money Operations</CardTitle>
+          <CardTitle>Concurrency Guarantees</CardTitle>
         </CardHeader>
 
-        <CardContent>
-          <pre className="p-4 rounded-lg bg-secondary/50 text-sm overflow-x-auto">
-{`BEGIN;
-UPDATE accounts SET balance = balance - 100 WHERE id='A';
-UPDATE accounts SET balance = balance + 100 WHERE id='B';
-INSERT INTO history (...);
-COMMIT;`}
-          </pre>
+        <CardContent className="space-y-2 text-muted-foreground">
+          <pre className="p-4 rounded-lg bg-secondary/50 text-sm overflow-x-auto">{`BEGIN;
+SELECT * FROM accounts WHERE id='A' FOR UPDATE;
+SELECT * FROM accounts WHERE id='B' FOR UPDATE;
+UPDATE accounts ...;
+INSERT INTO history ...;
+COMMIT;`}</pre>
 
-          <p className="mt-3 text-muted-foreground">
-            If any query fails → <strong>ROLLBACK</strong>.  
-            Balances are never corrupted.
-          </p>
+          <ul className="list-disc ml-6 space-y-2">
+            <li>FOR UPDATE ensures no concurrent withdrawal corrupts balance.</li>
+            <li>Strict serialisation of money movement.</li>
+          </ul>
         </CardContent>
       </Card>
 
@@ -253,13 +223,14 @@ COMMIT;`}
       <Card className="backdrop-blur-md bg-card/70 border border-border">
         <CardHeader>
           <CardTitle>Audit Logging</CardTitle>
+          <CardDescription>Forensics, fraud detection, and debugging.</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-3 text-muted-foreground">
           <ul className="list-disc ml-6 space-y-2">
-            <li>Records actor, action, IP, device, timestamp</li>
-            <li>Detects fraud or suspicious activity</li>
-            <li>Helps debugging & accountability</li>
+            <li>Every action is traced with actor, IP, device, and timestamp.</li>
+            <li>Crucial for detecting teller misuse and fraud patterns.</li>
+            <li>Real banks use WORM storage; this demo allows clearing for testing.</li>
           </ul>
         </CardContent>
       </Card>
@@ -271,10 +242,25 @@ COMMIT;`}
         </CardHeader>
         <CardContent className="text-muted-foreground">
           <ul className="list-disc ml-6 space-y-2">
-            <li>Race conditions → solved using SQL transactions</li>
-            <li>Bruteforce PIN attacks → automatic account lock</li>
-            <li>Data analysis → audit logs track every action</li>
+            <li>Race conditions → fixed using SELECT FOR UPDATE + atomic commits.</li>
+            <li>PIN brute-force → automatic account lock after repeated failures.</li>
+            <li>Maintaining traceability → strict audit event generation.</li>
           </ul>
+        </CardContent>
+      </Card>
+
+      {/* Limitations */}
+      <Card className="backdrop-blur-md bg-card/70 border border-border">
+        <CardHeader>
+          <CardTitle>Limitations</CardTitle>
+          <CardDescription>Honest constraints compared to real banking infra.</CardDescription>
+        </CardHeader>
+
+        <CardContent className="text-muted-foreground space-y-2">
+          <p>• No multi-factor authentication for high-value actions.</p>
+          <p>• No distributed transactions or cross-ledger coordination.</p>
+          <p>• Audit logs not append-only (demo constraint).</p>
+          <p>• No AML/KYC integration or fraud-detection engine.</p>
         </CardContent>
       </Card>
 
@@ -285,10 +271,10 @@ COMMIT;`}
         </CardHeader>
 
         <CardContent className="text-muted-foreground space-y-2">
-          <p>✅ ACID guarantees & transaction safety</p>
-          <p>✅ Hashed credentials & secure auth flows</p>
-          <p>✅ Modular API design with FastAPI routers</p>
-          <p>✅ Why banks maintain immutable ledgers</p>
+          <p>✅ ACID transactions for financial safety</p>
+          <p>✅ Secure auth flows: bcrypt + JWT</p>
+          <p>✅ How banks protect ledgers and audit trails</p>
+          <p>✅ Structuring modular APIs with FastAPI routers</p>
         </CardContent>
       </Card>
     </div>
