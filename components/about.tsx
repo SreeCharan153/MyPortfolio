@@ -7,18 +7,18 @@ import { Badge } from "./ui/badge";
 const About = () => {
   const experiences = [
     {
-      title: "Python Developer Intern",
-      company: "Zaalima Development (Remote)",
-      period: "Sep 2025 - Dec 2025",
-      description:
-        "Built File Organizer Pro — a desktop automation tool that sorts files in real time, detects duplicates, maintains logs in SQLite, and runs scheduled background tasks used by real users.",
-    },
-    {
       title: "Backend Developer",
       company: "PillionPal",
       period: "2024 - Present",
       description:
         "Building the backend for a GPS-based motorcycle ride-sharing system with JWT authentication, OTP login, live GPS tracking via WebSockets, wallets, and FairSplit — a mileage-based pricing engine.",
+    },
+    {
+      title: "Python Developer Intern",
+      company: "Zaalima Development (Remote)",
+      period: "Sep 2025 - Dec 2025",
+      description:
+        "Built File Organizer Pro — a desktop automation tool that sorts files in real time, detects duplicates, maintains logs in SQLite, and runs scheduled background tasks used by real users.",
     },
     {
       title: "Web Developer & Startup Support",
