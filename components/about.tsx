@@ -3,15 +3,16 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { title } from "node:process";
 
 const About = () => {
   const experiences = [
     {
-      title: "Backend Developer",
-      company: "PillionPal",
-      period: "2024 - Present",
+      title: "Freelance Backend Developer",
+      company: "Self-employed",
+      period: "2025 - Present",
       description:
-        "Building the backend for a GPS-based motorcycle ride-sharing system with JWT authentication, OTP login, live GPS tracking via WebSockets, wallets, and FairSplit — a mileage-based pricing engine.",
+        "Building the backend for multiple management systems such as HRMS , Online Voting System etc using FastAPI, PostgreSQL, and WebSockets.",
     },
     {
       title: "Python Developer Intern",
