@@ -80,6 +80,18 @@ const Projects = () => {
         github: "https://github.com/BhimaPavanTeja/e-summit-rec",
       },
     },
+    {
+      title: "FitStack",
+      description:
+        "An Application for finding the best-fit IT role for a given profile based on skills and experience.",
+      image: "/fitstack.png",
+      tags: ["Next.js", "Tailwind CSS","FastAPI", "Recommendation Engine"],
+      featured: false,
+      links: {
+        live: "https://fit-stack-psi.vercel.app/",
+        github: "https://github.com/SreeCharan153/FitStack",
+      },
+    },
   ];
 
   const [projects, setProjects] = useState<Project[]>(baseProjects);
