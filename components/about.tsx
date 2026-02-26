@@ -15,6 +15,13 @@ const About = () => {
         "Building the backend for multiple management systems such as HRMS , Online Voting System etc using FastAPI, PostgreSQL, and WebSockets.",
     },
     {
+      title: "Developer",
+      company: "PillionPal",
+      period: "2024 - Present",
+      description:
+        "Developed the backend for a GPS-based motorcycle ride-sharing system with JWT authentication, OTP login, live GPS tracking via WebSockets, wallets, and FairSplit — a mileage-based pricing engine.",
+    },
+    {
       title: "Python Developer Intern",
       company: "Zaalima Development (Remote)",
       period: "Sep 2025 - Dec 2025",
