@@ -80,6 +80,25 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* ✅ Smooth scrolling for the whole page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* ✅ Prevent navbar from covering section headings on anchor jump.
+     Accounts for the 64px (h-16) fixed navbar height. */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  /* ✅ Keyboard navigation: visible focus ring that respects the primary color.
+     Uses :focus-visible so mouse users never see the ring. */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
 }
 
 .gradient-text {

@@ -49,9 +49,13 @@ export default function ParticleLoader() {
     const imageData = offCtx.getImageData(0, 0, width, height);
     const particles: Particle[] = [];
 
-    // Reduced particle density for performance
-    for (let y = 0; y < height; y += 12) {
-      for (let x = 0; x < width; x += 12) {
+    // ✅ Reduce sample density on HiDPI / mobile screens for performance
+    // Mobile (dpr > 1) has more CSS pixels — step up to 16 to keep particle
+    // count similar to desktop at step 12
+    const step = dpr > 1 ? 16 : 12;
+
+    for (let y = 0; y < height; y += step) {
+      for (let x = 0; x < width; x += step) {
         const index = (y * width + x) * 4;
         if (imageData.data[index + 3] > 128) {
           const angle = Math.random() * Math.PI * 2;
@@ -72,7 +76,6 @@ export default function ParticleLoader() {
     const primary = getComputedStyle(document.body)
       .getPropertyValue("--primary")
       .trim();
-
     const purple = "262 83% 58%";
 
     const gradient = ctx.createLinearGradient(0, 0, width, height);
@@ -89,8 +92,8 @@ export default function ParticleLoader() {
     function animate() {
       if (!running) return;
 
-      ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = gradient;
+      ctx!.clearRect(0, 0, width, height);
+      ctx!.fillStyle = gradient;
 
       let settled = 0;
 
@@ -98,72 +101,41 @@ export default function ParticleLoader() {
         if (phase === "explode") {
           p.x += p.vx;
           p.y += p.vy;
-
           p.vx *= 0.975;
           p.vy *= 0.975;
-
-          if (explodeProgress > 1) {
-            phase = "pause";
-          }
-        }
-
-        else if (phase === "pause") {
+          if (explodeProgress > 1) phase = "pause";
+        } else if (phase === "pause") {
           p.vx *= 0.98;
           p.vy *= 0.98;
-
           p.x += p.vx;
           p.y += p.vy;
-
           pauseFrames++;
-
-          if (pauseFrames > 30) {
-            phase = "form";
-          }
-        }
-
-        else if (phase === "form") {
+          if (pauseFrames > 30) phase = "form";
+        } else if (phase === "form") {
           const dx = p.tx - p.x;
           const dy = p.ty - p.y;
-
-          if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) {
-            settled++;
-          }
-
+          if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) settled++;
           p.vx += dx * 0.006;
           p.vy += dy * 0.006;
-
           p.vx *= 0.95;
           p.vy *= 0.95;
-
           p.x += p.vx;
           p.y += p.vy;
-
-          if (settled > particles.length * 0.92) {
-            phase = "hold";
-          }
-        }
-
-        else if (phase === "hold") {
+          if (settled > particles.length * 0.92) phase = "hold";
+        } else if (phase === "hold") {
           holdFrames++;
-
-          // Hold for ~3 seconds (180 frames)
           if (holdFrames > 180) {
             running = false;
             setFadeOut(true);
-
-            setTimeout(() => {
-              setVisible(false);
-            }, 700);
-
+            setTimeout(() => setVisible(false), 700);
             return;
           }
         }
 
-        ctx.fillRect(p.x, p.y, 2, 2);
+        ctx!.fillRect(p.x, p.y, 2, 2);
       });
 
       explodeProgress += 0.008;
-
       animationFrame = requestAnimationFrame(animate);
     }
 
@@ -184,7 +156,13 @@ export default function ParticleLoader() {
       }`}
     >
       <div className="hero-gradient absolute inset-0" />
-      <canvas ref={canvasRef} className="relative z-10" />
+      {/* ✅ will-change: transform hints the browser to promote this to its own
+          GPU layer, improving compositing performance during animation */}
+      <canvas
+        ref={canvasRef}
+        className="relative z-10"
+        style={{ willChange: "transform" }}
+      />
     </div>
   );
 }

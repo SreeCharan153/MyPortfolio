@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
@@ -11,10 +11,17 @@ import { Link as ScrollLink } from "react-scroll";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [scrollProgress, setScrollProgress] = useState(0);
+  // ✅ Control Sheet open state so we can close it on mobile nav click
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // ✅ Scroll progress bar
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0);
 
       const sections = document.querySelectorAll("section[id]");
       const scrollY = window.pageYOffset;
@@ -30,7 +37,7 @@ const Navbar = () => {
       });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -52,17 +59,22 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
+      {/* ✅ Scroll progress bar */}
+      <div
+        className="absolute top-0 left-0 h-[2px] bg-primary transition-all duration-75"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo / Hero link */}
+          {/* Logo */}
           <ScrollLink
-            to="hero"
+            to="Hero"
             smooth={true}
             spy={true}
             offset={-80}
             duration={500}
             className="text-xl font-bold gradient-text cursor-pointer"
-            href="#hero" // crawlable link
           >
             <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               Sri Charan M.
@@ -79,7 +91,7 @@ const Navbar = () => {
                 spy={true}
                 offset={-80}
                 duration={500}
-                href={`#${item.to}`} // crawlable link
+                href={`#${item.to}`}
                 className={`relative text-sm font-medium cursor-pointer transition-colors ${
                   activeSection === item.to
                     ? "text-foreground"
@@ -103,29 +115,32 @@ const Navbar = () => {
           {/* Mobile menu */}
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
-            <Sheet>
+            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" aria-label="Open menu">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
               <SheetContent>
                 <div className="flex flex-col gap-6 mt-8">
                   {navItems.map((item) => (
-                    <a href={`#${item.to}`} key={item.name}>
-                      <ScrollLink
-                        to={item.to}
-                        smooth={true}
-                        spy={true}
-                        offset={-80}
-                        duration={500}
-                        className={`text-lg font-medium cursor-pointer ${
-                          activeSection === item.to ? "text-primary" : "text-foreground"
-                        }`}
-                      >
-                        {item.name}
-                      </ScrollLink>
-                    </a>
+                    // ✅ Fixed: close Sheet when a nav link is tapped on mobile
+                    <ScrollLink
+                      key={item.name}
+                      to={item.to}
+                      smooth={true}
+                      spy={true}
+                      offset={-80}
+                      duration={500}
+                      onClick={() => setMobileOpen(false)}
+                      className={`text-lg font-medium cursor-pointer transition-colors ${
+                        activeSection === item.to
+                          ? "text-primary"
+                          : "text-foreground hover:text-primary"
+                      }`}
+                    >
+                      {item.name}
+                    </ScrollLink>
                   ))}
                 </div>
               </SheetContent>

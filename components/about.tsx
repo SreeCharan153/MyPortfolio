@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { title } from "node:process";
+// ✅ Removed: unused `import { title } from "node:process"` — was a dead import
 
 const About = () => {
   const experiences = [
@@ -12,7 +12,7 @@ const About = () => {
       company: "Self-employed",
       period: "2025 - Present",
       description:
-        "Building the backend for multiple management systems such as HRMS , Online Voting System etc using FastAPI, PostgreSQL, and WebSockets.",
+        "Building the backend for multiple management systems such as HRMS, Online Voting System etc using FastAPI, PostgreSQL, and WebSockets.",
     },
     {
       title: "Developer",
@@ -79,14 +79,14 @@ const About = () => {
             <h2 className="text-4xl font-bold mb-4 gradient-text">About Me</h2>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I’m a backend-focused Python developer building secure, scalable
+              I&apos;m a backend-focused Python developer building secure, scalable
               systems using FastAPI, PostgreSQL, JWT authentication, and
               WebSockets. I specialize in solving hard backend problems —
               concurrency safety, data integrity, and real-time communication —
               and turning them into clean, production-ready APIs.
               <br />
               <br />
-              I’m currently building <strong>PillionPal</strong>, a GPS-based
+              I&apos;m currently building <strong>PillionPal</strong>, a GPS-based
               ride-sharing backend with live tracking and a mileage-based pricing
               engine designed for real-world scale.
             </p>
@@ -97,14 +97,14 @@ const About = () => {
             variants={itemVariants}
             className="mt-10 text-center mx-auto max-w-3xl"
           >
-            <h3 className="text-2xl font-semibold mb-4">What I’m Good At</h3>
+            <h3 className="text-2xl font-semibold mb-4">What I&apos;m Good At</h3>
 
             <ul className="grid sm:grid-cols-2 gap-y-3 text-muted-foreground text-sm">
               <li>✅ Designing secure authentication flows (JWT, OTP, cookies)</li>
-              <li>✅ Real-time WebSockets for live location & event streaming</li>
-              <li>✅ Building clean REST APIs with FastAPI & Pydantic</li>
-              <li>✅ SQL design, atomic transactions & race condition prevention</li>
-              <li>✅ Background automation & task scheduling</li>
+              <li>✅ Real-time WebSockets for live location &amp; event streaming</li>
+              <li>✅ Building clean REST APIs with FastAPI &amp; Pydantic</li>
+              <li>✅ SQL design, atomic transactions &amp; race condition prevention</li>
+              <li>✅ Background automation &amp; task scheduling</li>
               <li>✅ Writing modular, maintainable backend services</li>
             </ul>
           </motion.div>

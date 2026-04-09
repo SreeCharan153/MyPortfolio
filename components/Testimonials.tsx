@@ -34,13 +34,11 @@ const testimonials = [
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Auto-rotate every 4 seconds
-  useEffect(() => {
-    startAutoSlide();
-    return stopAutoSlide;
-  });
+  const stopAutoSlide = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+  };
 
   const startAutoSlide = () => {
     stopAutoSlide();
@@ -49,9 +47,12 @@ const Testimonials = () => {
     }, 4000);
   };
 
-  const stopAutoSlide = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-  };
+  // ✅ Fixed: added [current] dependency — was missing entirely, causing
+  // the effect to fire on every render and create overlapping timers
+  useEffect(() => {
+    startAutoSlide();
+    return stopAutoSlide;
+  }, [current]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section id="testimonials" className="section-padding bg-muted/50 overflow-x-hidden">
@@ -64,9 +65,8 @@ const Testimonials = () => {
         What People Say
       </motion.h2>
 
-      {/* Carousel Wrapper */}
       <div
-        className="relative max-w-3xl mx-auto"
+        className="relative max-w-3xl mx-auto px-4"
         onMouseEnter={stopAutoSlide}
         onMouseLeave={startAutoSlide}
       >
@@ -78,17 +78,18 @@ const Testimonials = () => {
         >
           <Card className="backdrop-blur-md bg-card/60 border border-white/10 rounded-xl shadow-xl">
             <CardContent className="p-8 text-center space-y-4">
-              <div className="mx-auto w-14 h-14 rounded-full overflow-hidden border border-white/20">
+              <div className="relative mx-auto w-14 h-14 rounded-full overflow-hidden border border-white/20">
                 <Image
                   src={testimonials[current].avatar || "/default-avatar.png"}
                   alt={testimonials[current].name}
                   fill
+                  loading="lazy"
                   className="object-cover"
                 />
               </div>
 
               <p className="text-muted-foreground italic max-w-xl mx-auto leading-relaxed">
-                “{testimonials[current].text}”
+                &ldquo;{testimonials[current].text}&rdquo;
               </p>
 
               <div className="space-y-0">
@@ -101,12 +102,13 @@ const Testimonials = () => {
           </Card>
         </motion.div>
 
-        {/* Small indicators */}
+        {/* Dot indicators */}
         <div className="flex justify-center mt-4 gap-2">
           {testimonials.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrent(idx)}
+              aria-label={`Go to testimonial ${idx + 1}`}
               className={`h-2.5 w-2.5 rounded-full transition-all ${
                 idx === current
                   ? "bg-primary"

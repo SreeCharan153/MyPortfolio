@@ -13,16 +13,27 @@ const Hero = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let particles: any[] = [];
-    const maxParticles = 50;
+    let particles: {
+      x: number; y: number; vx: number; vy: number; radius: number;
+      move: () => void; draw: () => void;
+    }[] = [];
+
     const connectionDistance = 150;
     const cursor = { x: -100, y: -100 };
 
+    // ✅ Fixed: use document.documentElement.clientWidth instead of window.innerWidth
+    // clientWidth excludes scrollbar — prevents horizontal overflow on Windows
+    const getWidth = () => document.documentElement.clientWidth;
+
+    // ✅ Reduce particles on mobile for smoother 60fps
+    const isMobile = () => getWidth() < 768;
+    const maxParticles = () => (isMobile() ? 25 : 50);
+
     const resizeCanvas = () => {
-      canvas.width = Math.min(window.innerWidth, document.documentElement.clientWidth);
+      canvas.width = getWidth();
       canvas.height = window.innerHeight;
     };
 
@@ -49,17 +60,20 @@ const Hero = () => {
       }
 
       draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#00ff99";
-        ctx.fill();
+        ctx!.beginPath();
+        ctx!.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx!.fillStyle = "#00ff99";
+        ctx!.fill();
       }
     }
 
     const initParticles = () => {
       particles = [];
-      for (let i = 0; i < maxParticles; i++) particles.push(new Particle());
+      for (let i = 0; i < maxParticles(); i++) particles.push(new Particle());
     };
+
+    // ✅ Fixed: store animationFrame ID for proper cleanup
+    let animationFrameId: number;
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas!.width, canvas!.height);
@@ -68,7 +82,6 @@ const Hero = () => {
         p.draw();
       });
 
-      // connections
       particles.forEach((p1, i) => {
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
@@ -87,7 +100,6 @@ const Hero = () => {
         }
       });
 
-      // cursor attraction
       particles.forEach((p) => {
         const dx = p.x - cursor.x;
         const dy = p.y - cursor.y;
@@ -103,35 +115,52 @@ const Hero = () => {
         }
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
     };
 
     window.addEventListener("resize", resizeCanvas);
-    window.addEventListener("mousemove", (e) => {
-      cursor.x = e.clientX;
-      cursor.y = e.clientY;
-    });
+    window.addEventListener("mousemove", handleMouseMove);
 
     resizeCanvas();
     initParticles();
     animate();
 
-    return () => window.removeEventListener("resize", resizeCanvas);
+    return () => {
+      // ✅ Fixed: properly cancel animation frame and remove both listeners
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (
-    <section id="Hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background">
-      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none w-[100vw] h-full" />
+    <section
+      id="Hero"
+      className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background"
+    >
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{ width: "100%", height: "100%" }}
+      />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-16 text-center">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }} className="space-y-8">
-
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="space-y-8"
+        >
           <div className="space-y-3">
             <h1 className="text-5xl md:text-7xl font-extrabold gradient-text">
               Sri Charan Machabhakthuni
             </h1>
 
-            {/* ✅ Identity punchline */}
             <p className="text-lg md:text-xl text-muted-foreground font-medium">
               I build secure, scalable backend systems — not just APIs that look good in demos.
             </p>
@@ -144,7 +173,7 @@ const Hero = () => {
                     "JWT Auth • RBAC • Zero-Trust Access",
                     "Real-time Apps with WebSockets",
                     "PostgreSQL • RLS • Triggers",
-                    "Clean architecture + production-ready code"
+                    "Clean architecture + production-ready code",
                   ],
                   autoStart: true,
                   loop: true,
@@ -158,10 +187,10 @@ const Hero = () => {
           {/* Socials */}
           <div className="flex justify-center flex-wrap gap-6">
             {[
-              { icon: Github, href: "https://github.com/SreeCharan153" },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/sree-charan-machabhakthuni/" },
-              { icon: Mail, href: "mailto:sricharanmachabhakthuni@gmail.com" },
-              { icon: LeetCodeIcon, href: "https://leetcode.com/u/sreecharan750/" },
+              { icon: Github, href: "https://github.com/SreeCharan153", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/sree-charan-machabhakthuni/", label: "LinkedIn" },
+              { icon: Mail, href: "mailto:sricharanmachabhakthuni@gmail.com", label: "Email" },
+              { icon: LeetCodeIcon, href: "https://leetcode.com/u/sreecharan750/", label: "LeetCode" },
             ].map((s, i) => (
               <motion.a
                 key={i}
@@ -170,6 +199,7 @@ const Hero = () => {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={s.label}
                 className="group relative"
               >
                 <Button variant="outline" size="icon" className="bg-background">
@@ -192,12 +222,7 @@ const Hero = () => {
               </a>
             </Button>
 
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="text-lg"
-            >
+            <Button asChild variant="outline" size="lg" className="text-lg">
               <a
                 href="/Sri Charan Machabhakthuni.pdf"
                 target="_blank"
