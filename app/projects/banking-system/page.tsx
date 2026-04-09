@@ -31,7 +31,7 @@ const BankingSystemCaseStudy = () => {
         className="space-y-4 text-center"
       >
         <h1 className="text-4xl md:text-5xl font-extrabold gradient-text pb-6">
-          Secure Banking System — FastAPI + PostgreSQL
+          RupeeWave – Secure Banking System — FastAPI + PostgreSQL
         </h1>
 
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

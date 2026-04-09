@@ -54,12 +54,12 @@ const Projects = () => {
       links: { github: "https://github.com/SreeCharan153/File-organizer" },
     },
     {
-      title: "Banking System – FastAPI + Next.js",
+      title: "RupeeWave – Secure Banking System",
       description:
         "Secure banking backend with hashed PIN auth, deposits, withdrawals, transfers, and audit logs. Next.js client for user banking actions.",
       image:
         "https://images.pexels.com/photos/13406565/pexels-photo-13406565.jpeg",
-      tags: ["FastAPI", "PostgreSQL", "Next.js", "JWT", "Docker"],
+      tags: ["FastAPI", "PostgreSQL", "Next.js", "JWT"],
       featured: true,
       links: {
         live: "https://rupeewave.vercel.app/",
@@ -92,6 +92,19 @@ const Projects = () => {
         github: "https://github.com/SreeCharan153/FitStack",
       },
     },
+    {
+      title: "ManagePro - Full-Stack HRMS Platform",
+      description:
+        "A comprehensive HR management application for streamlining employee onboarding, performance reviews, and payroll processing.",
+      image: "/Manage-Pro.png",
+      tags: ["Next.js", "TypeScript","Tailwind CSS","PostgreSQL", "FastAPI" , "JWT Auth"],
+      featured: false,
+      links: {
+        live: "https://manage-pro-hrms.vercel.app/",
+        github: "https://github.com/SreeCharan153/ManagePro",
+        casestudy: '/projects/managepro',
+      },
+    }
   ];
 
   const [projects, setProjects] = useState<Project[]>(baseProjects);
