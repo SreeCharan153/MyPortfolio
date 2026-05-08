@@ -3,10 +3,18 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { title } from "node:process";
 // ✅ Removed: unused `import { title } from "node:process"` — was a dead import
 
 const About = () => {
   const experiences = [
+    {
+      title: "Associate Software Engineer",
+      company: "Teckybot",
+      period: "2026 - Present",
+      description:
+        "Building the backend for a B2B SaaS platform that provides AI-driven analytics and automation tools for e-commerce businesses, using FastAPI, PostgreSQL, and WebSockets.",
+    },
     {
       title: "Freelance Backend Developer",
       company: "Self-employed",
@@ -15,7 +23,7 @@ const About = () => {
         "Building the backend for multiple management systems such as HRMS, Online Voting System etc using FastAPI, PostgreSQL, and WebSockets.",
     },
     {
-      title: "Developer",
+      title: "Co-Founder & Backend Developer",
       company: "PillionPal",
       period: "2024 - Present",
       description:
@@ -38,7 +46,7 @@ const About = () => {
     {
       title: "Cybersecurity Student",
       company: "Raghu Institute of Technology",
-      period: "2022 - Present",
+      period: "2022 - 2026",
       description:
         "Pursuing B.Tech in CSE Cybersecurity with a strong focus on backend engineering, secure authentication systems, and scalable system design.",
     },
