@@ -112,6 +112,19 @@ const baseProjects: Project[] = [
       casestudy: "/projects/managepro",
     },
   },
+  {
+    title: "Merited - A github profile analyzer",
+    description:
+      "A web application that analyzes GitHub profiles to provide insights on coding activity, language usage, and project impact.",
+    image: "/merited.png",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub API"],
+    featured: false,
+    category: "fullstack",
+    links: {
+      live: "https://merited-chi.vercel.app/",
+      github: "https://github.com/SreeCharan153/merited",
+    },
+  }
 ];
 
 type Filter = "all" | "backend" | "frontend" | "fullstack";
